@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:11
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=hunter2
+      - POSTGRES_DB=kvs
+
+  kvs:
+    build: kvs
+    environment:
+      - POSTGRES_HOST=postgres
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
